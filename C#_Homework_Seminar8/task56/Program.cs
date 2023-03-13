@@ -18,11 +18,12 @@ int ReadNumber (string messageToUser)
 }
 
 int rows = ReadNumber("Введите количество строк");
-int colums = ReadNumber("Введите количество столбцов");
+int columns = ReadNumber("Введите количество столбцов");
 
-int[,] myMatrix = new int [rows, colums];
+int[,] myMatrix = new int [rows, columns];
 int minSum = Int32.MaxValue;
-int indexRow = 0;
+int indexRow = 1;
+int indexRowMin = 0;
 
 void FillArray(int[,] matrix)
 {
@@ -56,11 +57,17 @@ void SumOfStringElements (int[,] matrix)
         {
             sum += matrix[i, j]; 
         }
-        if(sum < minSum)
+        int count = 0;
+        if (count < matrix.GetLength(0))
         {   
+            if (sum < minSum)
+            {
             minSum = sum;
+            indexRowMin = indexRow;
+            }
             indexRow++;
         }
+        count++;
     }
 }
 
@@ -68,4 +75,4 @@ FillArray(myMatrix);
 PrintMatrix(myMatrix);
 Console.WriteLine();
 SumOfStringElements(myMatrix);
-Console.WriteLine($"Строка с наименьшей суммой элементов = {indexRow}, её сумма = {minSum}");
+Console.WriteLine($"Строка с наименьшей суммой элементов = {indexRowMin}, её сумма = {minSum}");
